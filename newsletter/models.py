@@ -577,7 +577,10 @@ class Submission(models.Model):
         }
 
     def submit(self):
-        subscriptions = self.subscriptions.filter(subscribed=True)
+        if self.subscriptions.count() == 0:
+            subscriptions = self.newsletter.subscription_set.filter(subscribed=True)
+        else:
+            subscriptions = self.subscriptions.filter(subscribed=True)
 
         logger.info(
             ugettext(u"Submitting %(submission)s to %(count)d people"),
