@@ -12,7 +12,7 @@ from django.template.loader import select_template
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import ugettext
+from django.utils.translation import ugettext, override
 from django.utils.timezone import now
 
 from sorl.thumbnail import ImageField
@@ -35,6 +35,8 @@ class Newsletter(models.Model):
         max_length=200, verbose_name=_('newsletter title')
     )
     slug = models.SlugField(db_index=True, unique=True)
+
+    language = models.CharField(_("language"), default=settings.LANGUAGE_CODE, choices=settings.LANGUAGES, max_length=5)
 
     email = models.EmailField(
         verbose_name=_('e-mail'), help_text=_('Sender e-mail')
@@ -75,6 +77,7 @@ class Newsletter(models.Model):
         # Common root path for all the templates
         tpl_root = 'newsletter/message/'
 
+        # TODO Select templates per self.language
         subject_template = select_template([
             tpl_root + '%(newsletter)s/%(action)s_subject.txt' % tpl_subst,
             tpl_root + '%(action)s_subject.txt' % tpl_subst,
@@ -593,13 +596,14 @@ class Submission(models.Model):
         self.save()
 
         try:
-            for idx, subscription in enumerate(subscriptions, start=1):
-                if hasattr(settings, 'NEWSLETTER_EMAIL_DELAY'):
-                    time.sleep(settings.NEWSLETTER_EMAIL_DELAY)
-                if hasattr(settings, 'NEWSLETTER_BATCH_SIZE') and settings.NEWSLETTER_BATCH_SIZE > 0:
-                    if idx % settings.NEWSLETTER_BATCH_SIZE == 0:
-                        time.sleep(settings.NEWSLETTER_BATCH_DELAY)
-                self.send_message(subscription)
+            with override(self.newsletter.language):
+                for idx, subscription in enumerate(subscriptions, start=1):
+                    if hasattr(settings, 'NEWSLETTER_EMAIL_DELAY'):
+                        time.sleep(settings.NEWSLETTER_EMAIL_DELAY)
+                    if hasattr(settings, 'NEWSLETTER_BATCH_SIZE') and settings.NEWSLETTER_BATCH_SIZE > 0:
+                        if idx % settings.NEWSLETTER_BATCH_SIZE == 0:
+                            time.sleep(settings.NEWSLETTER_BATCH_DELAY)
+                    self.send_message(subscription)
             self.sent = True
 
         finally:

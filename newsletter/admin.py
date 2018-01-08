@@ -21,7 +21,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 
 from django.utils.html import format_html
-from django.utils.translation import ugettext as _, ungettext
+from django.utils.translation import ugettext as _, ungettext, override
 from django.utils.formats import date_format
 
 from django.views.decorators.clickjacking import xframe_options_sameorigin
@@ -61,8 +61,9 @@ ICON_URLS = {
 
 class NewsletterAdmin(admin.ModelAdmin):
     list_display = (
-        'title', 'admin_subscriptions', 'admin_messages', 'admin_submissions'
+        'title', 'language', 'admin_subscriptions', 'admin_messages', 'admin_submissions'
     )
+    list_filter = ['language']
     prepopulated_fields = {'slug': ('title',)}
 
     """ List extensions """
@@ -284,7 +285,9 @@ class MessageAdmin(NewsletterAdminLinkMixin, ExtendibleModelAdminMixin,
                          'STATIC_URL': settings.STATIC_URL,
                          'MEDIA_URL': settings.MEDIA_URL})
 
-        return HttpResponse(message.html_template.render(c))
+        with override(message.newsletter.language):
+            html = message.html_template.render(c)
+        return HttpResponse(html)
 
     @xframe_options_sameorigin
     def preview_text(self, request, object_id):
@@ -299,8 +302,11 @@ class MessageAdmin(NewsletterAdminLinkMixin, ExtendibleModelAdminMixin,
             'MEDIA_URL': settings.MEDIA_URL
         }, autoescape=False)
 
+        with override(message.newsletter.language):
+            text = message.text_template.render(c)
+
         return HttpResponse(
-            message.text_template.render(c),
+            text,
             content_type='text/plain'
         )
 
