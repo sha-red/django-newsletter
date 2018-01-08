@@ -212,17 +212,18 @@ if (
 
 class ArticleInline(AdminImageMixin, StackedInline):
     model = Article
-    extra = 2
+    extra = 0
     formset = ArticleFormSet
     fieldsets = (
         (None, {
-            'fields': ('title', 'text')
+            'fields': ('title', 'slug', 'hide_title', 'text')
         }),
         (_('Optional'), {
             'fields': ('sortorder', 'url', 'image'),
             'classes': ('collapse',)
         }),
     )
+    prepopulated_fields = {"slug": ("title",)}
 
     if newsletter_settings.RICHTEXT_WIDGET:
         formfield_overrides = {

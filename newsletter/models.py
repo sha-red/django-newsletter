@@ -8,6 +8,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import permalink
+from django.template.defaultfilters import truncatewords_html
 from django.template.loader import select_template
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.functional import cached_property
@@ -423,7 +424,7 @@ class Subscription(models.Model):
 @python_2_unicode_compatible
 class Article(models.Model):
     """
-    An Article within a Message which will be send through a Submission.
+    An Article within a Message which will be sent through a Submission.
     """
 
     sortorder = models.PositiveIntegerField(
@@ -432,14 +433,17 @@ class Article(models.Model):
         verbose_name=_('sort order'), blank=True
     )
 
-    title = models.CharField(max_length=200, verbose_name=_('title'))
+    title = models.CharField(
+        max_length=200, verbose_name=_('title'), blank=True, null=True
+    )
+    hide_title = models.BooleanField(default=False, verbose_name=_("Don't show the title in the final email."))
+    slug = models.SlugField(max_length=200, verbose_name=_('slug'))
     text = models.TextField(verbose_name=_('text'))
-
     url = models.URLField(
         verbose_name=_('link'), blank=True, null=True
     )
 
-    # Make this a foreign key for added elegance
+    # TODO: Make this a foreign key for added elegance
     image = ImageField(
         upload_to='newsletter/images/%Y/%m/%d', blank=True, null=True,
         verbose_name=_('image')
@@ -459,7 +463,7 @@ class Article(models.Model):
         unique_together = ('post', 'sortorder')
 
     def __str__(self):
-        return self.title
+        return self.title or truncatewords_html(self.text, 10)
 
     def save(self):
         if self.sortorder is None:
@@ -474,7 +478,7 @@ class Article(models.Model):
 class Message(models.Model):
     """ Message as sent through a Submission. """
 
-    title = models.CharField(max_length=200, verbose_name=_('title'))
+    title = models.CharField(max_length=200, verbose_name=_('title'))  # TODO Rename to 'subject line'
     slug = models.SlugField(verbose_name=_('slug'))
 
     newsletter = models.ForeignKey(

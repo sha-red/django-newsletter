@@ -4,8 +4,9 @@
 
 ++++++++++++++++++++
 
-{% for article in message.articles.all %}
+{% for article in message.articles.all %}{% if article.title %}
 {{ article.title }}
+{% endif %}
 {{ article.text|striptags|safe }}
 
 {% endfor %}
