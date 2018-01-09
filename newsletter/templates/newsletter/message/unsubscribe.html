@@ -6,14 +6,22 @@
     <title>{% blocktrans with title=newsletter.title %}Unsubscription from {{ title }}{% endblocktrans %}</title>
 </head>
 <body>
-{% blocktrans with name=subscription.name title=newsletter.title domain=site.domain url=subscription.unsubscribe_activate_url %}Dear {{ name }},
+{% if subscription.name %}{% blocktrans with name=subscription.name %}
+<p>Dear {{ name }}!</p>
+{% endblocktrans %}{% endif %}
+{% blocktrans with name=subscription.name title=newsletter.title domain=site.domain url=subscription.unsubscribe_activate_url %}
 
-you, or someone in your name requested unsubscription from {{ title }}.
+<p>You, or someone in your name requested unsubscription from {{ title }}.</p>
 
-If you would like to confirm your unsubscription, please follow this activation link:
-http://{{ domain }}{{ url }}
+<p>
+	If you would like to confirm your unsubscription, please follow this activation link:<br>
+	https://{{ domain }}{{ url }}
+</p>
 
-Kind regards,{% endblocktrans %}
-{{ newsletter.sender }}
+<p>
+	Kind regards,
+{% endblocktrans %}
+	{{ newsletter.sender }}
+</p>
 </body>
 </html>
