@@ -1,5 +1,6 @@
 import logging
 import time
+import django
 
 from django.conf import settings
 from django.contrib.sites.models import Site
@@ -16,6 +17,8 @@ from django.utils.translation import ugettext, override
 from django.utils.timezone import now
 
 from sorl.thumbnail import ImageField
+from distutils.version import LooseVersion
+
 
 from .compat import get_context, reverse
 from .utils import (
@@ -142,7 +145,7 @@ class Newsletter(models.Model):
         )
 
     def get_sender(self):
-        return u'%s <%s>' % (self.sender, self.email)
+        return get_address(self.sender, self.email)
 
     def get_subscriptions(self):
         logger.debug(u'Looking up subscribers for %s', self)
@@ -246,7 +249,6 @@ class Subscription(models.Model):
     def save(self, *args, **kwargs):
         """
         Perform some basic validation and state maintenance of Subscription.
-
         TODO: Move this code to a more suitable place (i.e. `clean()`) and
         cleanup the code. Refer to comment below and
         https://docs.djangoproject.com/en/dev/ref/models/instances/#django.db.models.Model.clean
@@ -346,10 +348,7 @@ class Subscription(models.Model):
         unique_together = ('user', 'email_field', 'newsletter')
 
     def get_recipient(self):
-        if self.name:
-            return u'%s <%s>' % (self.name, self.email)
-
-        return u'%s' % (self.email)
+        return get_address(self.name, self.email)
 
     def send_activation_email(self, action):
         assert action in ACTIONS, 'Unknown action: %s' % action
@@ -467,7 +466,7 @@ class Article(models.Model):
     def __str__(self):
         return self.title or truncatewords_html(self.text, 10)
 
-    def save(self):
+    def save(self, **kwargs):
         if self.sortorder is None:
             # If saving a new object get the next available Article ordering
             # as to assure uniqueness.
@@ -683,7 +682,7 @@ class Submission(models.Model):
             submission.subscriptions = message.newsletter.get_subscriptions()
         return submission
 
-    def save(self):
+    def save(self, **kwargs):
         """ Set the newsletter from associated message upon saving. """
         assert self.message.newsletter
 
@@ -744,3 +743,13 @@ class Submission(models.Model):
         default=False, verbose_name=_('sending'),
         db_index=True, editable=False
     )
+
+def get_address(name, email):
+    # Converting name to ascii for compatibility with django < 1.9.
+    # Remove this when django 1.8 is no longer supported.
+    if LooseVersion(django.get_version()) < LooseVersion('1.9'):
+        name = name.encode('ascii', 'ignore').decode('ascii').strip()
+    if name:
+        return u'%s <%s>' % (name, email)
+    else:
+        return u'%s' % email
