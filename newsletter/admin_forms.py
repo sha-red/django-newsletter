@@ -7,7 +7,7 @@ from django.contrib.admin import widgets, options
 from django.utils.translation import ugettext as _
 
 from .models import Subscription, Newsletter, Submission
-from .addressimport.parsers import parse_csv, parse_vcard, parse_ldif
+from .addressimport.parsers import parse_csv, parse_vcard, parse_ldif, parse_text
 
 
 logger = logging.getLogger(__name__)
@@ -53,6 +53,10 @@ class ImportForm(forms.Form):
 
         elif ext == 'csv':
             self.addresses = parse_csv(
+                myvalue.file, newsletter, ignore_errors)
+
+        elif ext == 'txt':
+            self.addresses = parse_text(
                 myvalue.file, newsletter, ignore_errors)
 
         else:

@@ -163,6 +163,47 @@ def get_encoding(myfile):
     return encoding
 
 
+def parse_text(myfile, newsletter, ignore_errors=False):
+    """
+    Parse addresses from text file-object into newsletter.
+
+    Returns a dictionary mapping email addresses into Subscription objects.
+    """
+
+    import unicodecsv
+
+    encoding = get_encoding(myfile)
+
+    # Attempt to detect the dialect
+    # Ref: https://bugs.python.org/issue5332
+    encodedfile = io.TextIOWrapper(myfile, encoding=encoding, newline='')
+    dialect = unicodecsv.Sniffer().sniff(encodedfile.read(1024))
+
+    # Reset the file index
+    myfile.seek(0)
+
+    logger.info('Detected encoding %s and dialect %s for CSV file',
+                encoding, dialect)
+
+    address_list = AddressList(newsletter, ignore_errors)
+    line_num = 1
+    for row in myfile.readlines():
+        name, _, email = row.partition("<")
+        if email:
+            name = name.strip()[:30]
+            email = email.strip(" <>\n\r")
+        else:
+            email = name.strip(" <>\n\r")
+            name = ""
+
+        address_list.add(
+            email, name, location="line %d" % line_num
+        )
+        line_num += 1
+
+    return address_list.addresses
+
+
 def parse_csv(myfile, newsletter, ignore_errors=False):
     """
     Parse addresses from CSV file-object into newsletter.
