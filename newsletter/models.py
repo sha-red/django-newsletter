@@ -29,6 +29,7 @@ from .utils import (
 logger = logging.getLogger(__name__)
 
 AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
+PUBLISH_IN_ARCHIVE = getattr(settings, 'NEWSLETTER_PUBLISH_IN_ARCHIVE', True)
 
 
 @python_2_unicode_compatible
@@ -726,7 +727,7 @@ class Submission(models.Model):
         default=now, db_index=True
     )
     publish = models.BooleanField(
-        default=True, verbose_name=_('publish'),
+        default=PUBLISH_IN_ARCHIVE, verbose_name=_('publish'),
         help_text=_('Publish in archive.'), db_index=True
     )
 
