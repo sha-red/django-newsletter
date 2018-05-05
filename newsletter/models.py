@@ -12,6 +12,7 @@ from django.template.defaultfilters import truncatewords_html
 from django.template.loader import select_template
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.functional import cached_property
+from django.utils.html import strip_tags
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext, override
 from django.utils.timezone import now
@@ -464,7 +465,7 @@ class Article(models.Model):
         unique_together = ('post', 'sortorder')
 
     def __str__(self):
-        return self.title or truncatewords_html(self.text, 10)
+        return self.title or strip_tags(truncatewords_html(self.text, 10))
 
     def save(self, **kwargs):
         if self.sortorder is None:
