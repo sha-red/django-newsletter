@@ -282,6 +282,7 @@ class MessageAdmin(NewsletterAdminLinkMixin, ExtendibleModelAdminMixin,
                          'site': Site.objects.get_current(),
                          'newsletter': message.newsletter,
                          'date': now(),
+                         'debug': settings.DEBUG,
                          'STATIC_URL': settings.STATIC_URL,
                          'MEDIA_URL': settings.MEDIA_URL})
 
@@ -298,6 +299,7 @@ class MessageAdmin(NewsletterAdminLinkMixin, ExtendibleModelAdminMixin,
             'site': Site.objects.get_current(),
             'newsletter': message.newsletter,
             'date': now(),
+            'debug': settings.DEBUG,
             'STATIC_URL': settings.STATIC_URL,
             'MEDIA_URL': settings.MEDIA_URL
         }, autoescape=False)
