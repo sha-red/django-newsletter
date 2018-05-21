@@ -55,7 +55,10 @@ class NewsletterViewBase(object):
 
 
 class NewsletterDetailView(NewsletterViewBase, DetailView):
-    pass
+    def get_context_data(self, **kwargs):
+        context = super(NewsletterDetailView, self).get_context_data(**kwargs)
+        context['show_archive'] = getattr(settings, 'NEWSLETTER_PUBLISH_IN_ARCHIVE', False)
+        return context
 
 
 class NewsletterListView(NewsletterViewBase, ListView):

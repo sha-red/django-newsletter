@@ -1,25 +1,47 @@
-{% extends "newsletter/common.html" %}
-
+{% extends "newsletter/newsletter_detail.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Newsletter subscribe" %}{% endblock title %}
 
-{% block body %}
-    <h1>{% trans "Newsletter subscribe" %} {{ newsletter.title }}</h1>
+{% block title %}{% trans "Subscribe Newsletter" %}{% endblock title %}
 
-    {% if error %}
-        <p>{% trans "Due to a technical error we were not able to submit your confirmation email. This could be because your email address is invalid." %}</p>
 
-        {% comment %} Replace the the following dummy with a valid email address and remove this comment.
+{% block action_title %}{% trans "Subscribe Newsletter" %}{% endblock action_title %}
 
-        <p>{% trans "If the error persists, please don't hesitate to contact us at the following email address:" %} <a href="mailto:info@foobar.com">info@foobar.com</a></p>
 
-        {% endcomment %}
-    {% else %}
-        <form enctype="multipart/form-data" method="post" action=".">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <p><input id="id_submit" name="submit" value="{% trans "Subscribe" %}" type="submit" /></p>
-        </form>
-    {% endif %}
-{% endblock body %}
+{% block action_content %}
+	{% if error %}
+		<p>
+			{% trans "Due to a technical error we were not able to submit your confirmation email. This could be because your email address is invalid." %}
+		</p>
+
+		{% comment %} Replace the the following dummy with a valid email address and remove this comment.
+
+		<p>{% trans "If the error persists, please don't hesitate to contact us at the following email address:" %} <a href="mailto:info@foobar.com">info@foobar.com</a></p>
+
+		{% endcomment %}
+
+	{% else %}
+		<p>
+			{% trans "Die von Ihnen angegebene E-Mail-Adresse wird nur zur Versendung des Newsletters verwendet. Dazu speichern wir die von Ihnen angegebene Email-Adresse und den ggf. freiwillig angegebenen Namen. Eine darüberhinausgehende Weitergabe an Dritte oder sonstige Verwendung findet nicht statt." %}
+		</p>
+
+		<p>
+			{% trans "Das Newsletter-Abonnement kann von Ihnen jederzeit selbstständig über unsere Website gekündigt werden." %}
+		</p>
+
+		<p class="dsgvo">
+			{% url 'privacy' as privacy_url %}
+			{% blocktrans trimmed %}
+				Mit dem Abonnieren unseres Email-Newsletters erklären Sie, das Sie unsere
+				<a href="{{ privacy_url }}">Datenschutzbestimmungen</a> zur Kenntnis genommen haben.
+			{% endblocktrans %}
+		</p>
+
+		<form class="newsletter subscribe" enctype="multipart/form-data" method="post" action=".">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<p><input id="id_submit" name="submit" value="{% trans "Subscribe" %}" type="submit" /></p>
+		</form>
+
+	{% endif %}
+{% endblock action_content %}

@@ -1,41 +1,49 @@
 {% extends "newsletter/common.html" %}
-
 {% load i18n %}
+
 
 {% block title %}{% trans "Newsletter list" %}{% endblock title %}
 
+
 {% block body %}
+	<hgroup>
+		<h1 class="action-label">{% trans "Newsletter" %}</h1>
+	</hgroup>
+
+	<p>
+		{% trans "Zum Abonnieren unseres Newletters oder zum Beenden Ihres Abonnements wählen Sie bitte den entsprechenden Newsletter unten aus der Liste." %}
+	</p>
+
 {% if user.is_authenticated %}
-<form method="POST" action="">
-  {% csrf_token %}
-  {{ formset.management_form }}
-  <table>
-    <tr>
-        <th>{% trans "Newsletter" %}</th>
-        {% if user %}
-        <th>{% trans "Subscribe" %}</th>
-        {% endif %}
-    </tr>
-    {% for form in formset.forms %}
-      <tr>
-        <td>{{ form.id }}{{ form.newsletter }}
-<a href="{% url "newsletter_detail" form.instance.newsletter.slug %}">{{ form.instance.newsletter.title }}</a></td>
-        <td>{{ form.subscribed }}</td>
-      </tr>
-    {% endfor %}
-  </table>
-  <p><input id="id_submit" name="submit" value="{% trans "Update subscriptions" %}" type="submit" /></p>
-</form>
+	<form class="newsletter list" method="POST" action="">
+		{% csrf_token %}
+		{{ formset.management_form }}
+		<table class="newsletter list">
+			<tr>
+				<th colspan="2">{% trans "Abonniert" %}</th>
+			</tr>
+			{% for form in formset.forms %}
+				<tr>
+					<td>{{ form.subscribed }}</td>
+					<td>
+						{{ form.id }}{{ form.newsletter }}
+						<a href="{% url "newsletter_detail" form.instance.newsletter.slug %}">{{ form.instance.newsletter.title }}</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+		<p><input id="id_submit" name="submit" value="{% trans "Update subscriptions" %}" type="submit" /></p>
+	</form>
+
 {% else %}
-<table>
-    <tr>
-        <th>{% trans "Newsletter" %}</th>
-    </tr>
-    {% for newsletter in object_list %}
-    <tr>
-        <td><a href="{% url "newsletter_detail" newsletter.slug %}">{{ newsletter.title }}</a></td>
-    </tr>
-    {% endfor %}
-</table>
+
+	<table class="newsletter list">
+		{% for newsletter in object_list %}
+		<tr>
+			<td><a href="{% url "newsletter_detail" newsletter.slug %}">{{ newsletter.title }}</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+
 {% endif %}
 {% endblock body %}

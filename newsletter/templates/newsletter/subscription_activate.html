@@ -1,15 +1,21 @@
-{% extends "newsletter/common.html" %}
-
+{% extends "newsletter/newsletter_detail.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Newsletter" %} {{ newsletter.title }} {{ action }} {% trans "activate" %}{% endblock title %}
 
-{% block body %}
-    <h1>{% trans "Newsletter" %} {{ newsletter.title }} {{ action }} {% trans "activate" %}</h1>
+{% block action_title %}
+	{{ block.super }} – {% trans "activate" %}
+{% endblock action_title %}
 
-    <form enctype="multipart/form-data" method="post" action=".">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <p><input id="id_submit" name="submit" value="{% trans "Activate" %}" type="submit" /></p>
-    </form>
-{% endblock body %}
+
+{% block action_content %}
+	<p>
+		{% trans "Please confirm your subscription using the supplied activation key:" %}
+
+		<form enctype="multipart/form-data" method="post" action=".">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<p><input id="id_submit" name="submit" value="{% trans "Activate" %}" type="submit" /></p>
+		</form>
+	</p>
+
+{% endblock action_content %}
