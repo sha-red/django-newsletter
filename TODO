@@ -1,0 +1,2 @@
+- Don't show form errors for update request if the email address is unknown/not activated -> privacy
+- Email templates language dependent (language setting from Newsletter object)
