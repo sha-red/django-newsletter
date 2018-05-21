@@ -1,7 +1,5 @@
-import logging
-logger = logging.getLogger(__name__)
-
 import io
+import logging
 
 from django import forms
 from django.core.exceptions import ValidationError
@@ -9,6 +7,9 @@ from django.core.validators import validate_email
 from django.utils.translation import ugettext as _
 
 from newsletter.models import Subscription
+
+
+logger = logging.getLogger(__name__)
 
 
 class AddressList(object):
@@ -170,24 +171,17 @@ def parse_text(myfile, newsletter, ignore_errors=False):
     Returns a dictionary mapping email addresses into Subscription objects.
     """
 
-    import unicodecsv
-
     encoding = get_encoding(myfile)
-
-    # Attempt to detect the dialect
-    # Ref: https://bugs.python.org/issue5332
     encodedfile = io.TextIOWrapper(myfile, encoding=encoding, newline='')
-    dialect = unicodecsv.Sniffer().sniff(encodedfile.read(1024))
 
     # Reset the file index
-    myfile.seek(0)
+    encodedfile.seek(0)
 
-    logger.info('Detected encoding %s and dialect %s for CSV file',
-                encoding, dialect)
+    logger.info('Detected encoding %s for text file', encoding)
 
     address_list = AddressList(newsletter, ignore_errors)
     line_num = 1
-    for row in myfile.readlines():
+    for row in encodedfile.readlines():
         name, _, email = row.partition("<")
         if email:
             name = name.strip()[:30]
@@ -337,8 +331,6 @@ def parse_vcard(myfile, newsletter, ignore_errors=False):
         if hasattr(myvcard, 'fn'):
             name = myvcard.fn.value
         else:
-
-
             name = None
 
         # Do we have an email address?
