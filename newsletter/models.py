@@ -40,6 +40,7 @@ class Newsletter(models.Model):
         max_length=200, verbose_name=_('newsletter title')
     )
     slug = models.SlugField(db_index=True, unique=True)
+    description = models.TextField(_("description"), null=True, blank=True)
 
     language = models.CharField(_("language"), default=settings.LANGUAGE_CODE, choices=settings.LANGUAGES, max_length=5)
 
