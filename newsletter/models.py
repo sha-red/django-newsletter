@@ -478,8 +478,9 @@ class Article(models.Model):
         super(Article, self).save()
 
 
-def get_default_newsletter():
-    return Newsletter.get_default()
+def get_default_newsletter_pk():
+    return Newsletter.get_default().pk
+
 
 @python_2_unicode_compatible
 class Message(models.Model):
@@ -489,7 +490,7 @@ class Message(models.Model):
     slug = models.SlugField(verbose_name=_('slug'))
 
     newsletter = models.ForeignKey(
-        Newsletter, verbose_name=_('newsletter'), on_delete=models.CASCADE, default=get_default_newsletter
+        Newsletter, verbose_name=_('newsletter'), on_delete=models.CASCADE, default=get_default_newsletter_pk
     )
 
     date_create = models.DateTimeField(
