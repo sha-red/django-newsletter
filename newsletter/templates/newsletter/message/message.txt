@@ -13,4 +13,4 @@
 
 ++++++++++++++++++++
 
-{% trans "Unsubscribe:" %} https://{{ site }}{% url "newsletter_unsubscribe_request" newsletter.slug %}
+{% include "newsletter/message/_unsubscribe.txt" %}
