@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 import logging
 import time
 import django
@@ -441,10 +444,12 @@ class Article(models.Model):
         max_length=200, verbose_name=_('title'), blank=True, null=True
     )
     hide_title = models.BooleanField(default=False, verbose_name=_("Don't show the title in the final email."))
-    slug = models.SlugField(max_length=200, verbose_name=_('slug'))
+    slug = models.SlugField(max_length=200, verbose_name=_('slug'), null=True, blank=True,
+        help_text=_("Für lokale Verlinkungen innerhalb des Newsletter (optional)"))
     text = models.TextField(verbose_name=_('text'))
     url = models.URLField(
-        verbose_name=_('link'), blank=True, null=True
+        verbose_name=_('link'), blank=True, null=True,
+        help_text=_("Ein \"Read More\"-Link z.B. auf eine Webseite.")
     )
 
     # TODO: Make this a foreign key for added elegance

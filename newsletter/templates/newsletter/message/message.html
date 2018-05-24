@@ -9,6 +9,7 @@
     <h1>{{ newsletter.title }}</h1>
     <h2>{{ message.title }}</h2>
     {% for article in message.articles.all %}
+    <div class="article"{% if article.slug %} id="{{ article.slug }}"{% endif %}>
         {% if article.title %}
             <h3>{{ article.title }}</h3>
         {% endif %}
@@ -22,6 +23,7 @@
         {% if article.url %}
             <div><a href="{{ article.url }}">{% trans "Read more" %}</a></div>
         {% endif %}
+    </div>
     {% endfor %}
     
     <ul>
