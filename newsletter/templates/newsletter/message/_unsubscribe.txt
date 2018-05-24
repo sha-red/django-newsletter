@@ -1,1 +1,1 @@
-{% load i18n %}{% url "newsletter_unsubscribe_request" newsletter.slug as unsubscribe_url %}{% trans "Unsubscribe" %}: https://{{ site.domain }}{{ subscription.unsubscribe_activate_url|default:unsubscribe_url }}
+{% load i18n %}{% url "newsletter_unsubscribe_request" newsletter.slug as unsubscribe_url %}Abmelden / Unsubscribe: https://{{ site.domain }}{{ subscription.unsubscribe_activate_url|default:unsubscribe_url }}

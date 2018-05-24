@@ -1,4 +1,4 @@
 {% load i18n %}
 
 	{% url "newsletter_unsubscribe_request" newsletter.slug as unsubscribe_url %}
-	<a href="https://{{ site.domain }}{{ subscription.unsubscribe_activate_url|default:unsubscribe_url }}">{% trans "Unsubscribe" %}</a>
+	<a href="https://{{ site.domain }}{{ subscription.unsubscribe_activate_url|default:unsubscribe_url }}">Abmelden / Unsubscribe</a>
