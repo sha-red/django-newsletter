@@ -29,13 +29,7 @@
 			{% trans "Das Newsletter-Abonnement kann von Ihnen jederzeit selbstständig über unsere Website gekündigt werden." %}
 		</p>
 
-		<p class="dsgvo">
-			{% url 'privacy' as privacy_url %}
-			{% blocktrans trimmed %}
-				Mit dem Abonnieren unseres Email-Newsletters erklären Sie, das Sie unsere
-				<a href="{{ privacy_url }}">Datenschutzbestimmungen</a> zur Kenntnis genommen haben.
-			{% endblocktrans %}
-		</p>
+		{% include "newsletter/include/subscribe_privacy.html" %}
 
 		<form class="newsletter subscribe" enctype="multipart/form-data" method="post" action=".">
 			{% csrf_token %}
