@@ -686,8 +686,7 @@ msgstr ""
 "\t<a href=\"https://%(domain)s%(url)s\">https://%(domain)s%(url)s</a>\n"
 "</p>\n"
 "\n"
-"<p>\n"
-"\\Freundliche Grüße,\n"
+"<p>\nFreundliche Grüße,\n"
 
 #: templates/newsletter/message/subscribe.txt:2
 #: templates/newsletter/message/unsubscribe.txt:2
@@ -719,7 +718,7 @@ msgstr ""
 "\thttps://%(domain)s%(url)s\n"
 "\n"
 "\n"
-"\\Freundliche Grüße,"
+"Freundliche Grüße,"
 
 #: templates/newsletter/message/subscribe_subject.txt:1
 msgid "Confirm subscription"
@@ -758,7 +757,7 @@ msgstr ""
 "</p>\n"
 "\n"
 "<p>\n"
-"\\Freundliche Grüße,\n"
+"Freundliche Grüße,\n"
 
 #: templates/newsletter/message/unsubscribe.txt:3
 #, python-format
@@ -784,7 +783,7 @@ msgstr ""
 "\n"
 "\n"
 "\n"
-"\\Freundliche Grüße,"
+"Freundliche Grüße,"
 
 #: templates/newsletter/message/unsubscribe_subject.txt:1
 msgid "Confirm unsubscription"
