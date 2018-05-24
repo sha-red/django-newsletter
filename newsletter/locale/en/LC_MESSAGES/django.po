@@ -5,73 +5,75 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-21 14:54+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2018-05-24 14:35+0200\n"
+"PO-Revision-Date: 2018-05-24 14:48+0200\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Erik Stein <erik@classlibrary.net>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.7\n"
 
-#: addressimport/parsers.py:40
+#: addressimport/parsers.py:41
 #, python-format
 msgid "Entry '%s' does not contain a valid e-mail address."
 msgstr ""
 
-#: addressimport/parsers.py:55
+#: addressimport/parsers.py:56
 #, python-format
 msgid "The address file contains duplicate entries for '%s'."
 msgstr ""
 
-#: addressimport/parsers.py:69
+#: addressimport/parsers.py:70
 msgid "Some entries are already subscribed to."
 msgstr ""
 
-#: addressimport/parsers.py:108
+#: addressimport/parsers.py:109
 #, python-format
 msgid ""
 "E-mail address %(email)s too long, maximum length is %(email_length)s "
 "characters."
 msgstr ""
 
-#: addressimport/parsers.py:135
+#: addressimport/parsers.py:136
 #, python-format
 msgid "Name %(name)s too long, maximum length is %(name_length)s characters."
 msgstr ""
 
-#: addressimport/parsers.py:237 addressimport/parsers.py:249
-#: addressimport/parsers.py:284 models.py:175
+#: addressimport/parsers.py:231 addressimport/parsers.py:243
+#: addressimport/parsers.py:278 models.py:175
 msgid "name"
 msgstr ""
 
-#: addressimport/parsers.py:241
+#: addressimport/parsers.py:235
 msgid "display"
 msgstr ""
 
-#: addressimport/parsers.py:248
+#: addressimport/parsers.py:242
 #, python-format
 msgid ""
 "Name column not found. The name of this column should be either 'name' or "
 "'%s'."
 msgstr ""
 
-#: addressimport/parsers.py:260 addressimport/parsers.py:272
-#: addressimport/parsers.py:285 forms.py:43 forms.py:76 models.py:48
+#: addressimport/parsers.py:254 addressimport/parsers.py:266
+#: addressimport/parsers.py:279 forms.py:43 forms.py:76 models.py:48
 #: models.py:189
 msgid "e-mail"
 msgstr ""
 
-#: addressimport/parsers.py:270
+#: addressimport/parsers.py:264
 #, python-format
 msgid ""
 "E-mail column not found. The name of this column should be either 'email', "
 "'e-mail' or '%(email)s'."
 msgstr ""
 
-#: addressimport/parsers.py:280
+#: addressimport/parsers.py:274
 #, python-format
 msgid ""
 "Could not properly determine the proper columns in the CSV-file. There "
@@ -79,22 +81,22 @@ msgid ""
 "'%(e-mail)s'."
 msgstr ""
 
-#: addressimport/parsers.py:305
+#: addressimport/parsers.py:299
 #, python-format
 msgid "Row with content '%(row)s' does not contain a name and email field."
 msgstr ""
 
-#: addressimport/parsers.py:331
+#: addressimport/parsers.py:325
 #, python-format
 msgid "Error reading vCard file: %s"
 msgstr ""
 
-#: addressimport/parsers.py:350
+#: addressimport/parsers.py:342
 #, python-format
 msgid "Entry '%s' contains no email address."
 msgstr ""
 
-#: addressimport/parsers.py:386
+#: addressimport/parsers.py:378
 msgid "Some entries have no e-mail address."
 msgstr ""
 
@@ -112,11 +114,11 @@ msgstr ""
 msgid "Submissions"
 msgstr ""
 
-#: admin.py:100 models.py:112 models.py:309 models.py:492 models.py:710
+#: admin.py:100 models.py:112 models.py:309 models.py:493 models.py:711
 msgid "newsletter"
 msgstr ""
 
-#: admin.py:118 models.py:562
+#: admin.py:118 models.py:563
 msgid "submission"
 msgstr ""
 
@@ -156,7 +158,7 @@ msgstr ""
 msgid "Optional"
 msgstr ""
 
-#: admin.py:255 models.py:459 models.py:503 models.py:714
+#: admin.py:255 models.py:459 models.py:504 models.py:715
 msgid "message"
 msgstr ""
 
@@ -415,7 +417,7 @@ msgstr ""
 msgid "sort order"
 msgstr ""
 
-#: models.py:441 models.py:488
+#: models.py:441 models.py:489
 msgid "title"
 msgstr ""
 
@@ -423,7 +425,7 @@ msgstr ""
 msgid "Don't show the title in the final email."
 msgstr ""
 
-#: models.py:444 models.py:489
+#: models.py:444 models.py:490
 msgid "slug"
 msgstr ""
 
@@ -447,83 +449,83 @@ msgstr ""
 msgid "articles"
 msgstr ""
 
-#: models.py:496
+#: models.py:497
 msgid "created"
 msgstr ""
 
-#: models.py:499
+#: models.py:500
 msgid "modified"
 msgstr ""
 
-#: models.py:504
+#: models.py:505
 msgid "messages"
 msgstr ""
 
-#: models.py:509
+#: models.py:510
 #, python-format
 msgid "%(title)s in %(newsletter)s"
 msgstr ""
 
-#: models.py:563
+#: models.py:564
 msgid "submissions"
 msgstr ""
 
-#: models.py:566
+#: models.py:567
 #, python-format
 msgid "%(newsletter)s on %(publish_date)s"
 msgstr ""
 
-#: models.py:588
+#: models.py:589
 #, python-format
 msgid "Submitting %(submission)s to %(count)d people"
 msgstr ""
 
-#: models.py:648
+#: models.py:649
 #, python-format
 msgid "Submitting message to: %s."
 msgstr ""
 
-#: models.py:657
+#: models.py:658
 #, python-format
 msgid "Message %(subscription)s failed with error: %(error)s"
 msgstr ""
 
-#: models.py:675
+#: models.py:676
 #, python-format
 msgid "Submission of message %s"
 msgstr ""
 
-#: models.py:720
+#: models.py:721
 msgid ""
 "If you select none, the system will automatically find the subscribers for "
 "you."
 msgstr ""
 
-#: models.py:722
+#: models.py:723
 msgid "recipients"
 msgstr ""
 
-#: models.py:727
+#: models.py:728
 msgid "publication date"
 msgstr ""
 
-#: models.py:731
+#: models.py:732
 msgid "publish"
 msgstr ""
 
-#: models.py:732
+#: models.py:733
 msgid "Publish in archive."
 msgstr ""
 
-#: models.py:736
+#: models.py:737
 msgid "prepared"
 msgstr ""
 
-#: models.py:740
+#: models.py:741
 msgid "sent"
 msgstr ""
 
-#: models.py:744
+#: models.py:745
 msgid "sending"
 msgstr ""
 
@@ -583,6 +585,12 @@ msgstr ""
 #: templates/admin/newsletter/subscription/importform.html:37
 msgid "Upload"
 msgstr ""
+
+#: templates/newsletter/include/subscribe_privacy.html:4
+msgid ""
+"Mit dem Abonnieren unseres Email-Newsletters erklären Sie, das Sie unsere "
+"Datenschutzbestimmungen zur Kenntnis genommen haben."
+msgstr "In subscribing our newsletter you accept our privacy terms."
 
 #: templates/newsletter/message/message.html:23
 msgid "Read more"
@@ -750,10 +758,10 @@ msgstr ""
 msgid ""
 "Zum Abonnieren unseres Newletters oder zum Beenden Ihres Abonnements wählen "
 "Sie sich bitte unten die entsprechende Option."
-msgstr ""
+msgstr "Please select if you want to subscribe or unsubscribe our newsletter."
 
 #: templates/newsletter/newsletter_detail.html:29
-#: templates/newsletter/subscription_subscribe.html:44
+#: templates/newsletter/subscription_subscribe.html:38
 #: templates/newsletter/subscription_subscribe_user.html:20
 msgid "Subscribe"
 msgstr ""
@@ -770,7 +778,7 @@ msgstr ""
 msgid ""
 "Zum Abonnieren unseres Newletters oder zum Beenden Ihres Abonnements wählen "
 "Sie bitte den entsprechenden Newsletter unten aus der Liste."
-msgstr ""
+msgstr "Please select the newsletter you want to subscribe or unsubscribe."
 
 #: templates/newsletter/newsletter_list.html:23
 msgid "Abonniert"
@@ -825,14 +833,7 @@ msgid ""
 "Das Newsletter-Abonnement kann von Ihnen jederzeit selbstständig über unsere "
 "Website gekündigt werden."
 msgstr ""
-
-#: templates/newsletter/subscription_subscribe.html:35
-#, python-format
-msgid ""
-"Mit dem Abonnieren unseres Email-Newsletters erklären Sie, das Sie unsere <a "
-"href=\"%(privacy_url)s\">Datenschutzbestimmungen</a> zur Kenntnis genommen "
-"haben."
-msgstr ""
+"You can unsubscribe from the newsletter at any time through our website."
 
 #: templates/newsletter/subscription_subscribe_activated.html:12
 msgid "Your subscription has successfully been activated."
