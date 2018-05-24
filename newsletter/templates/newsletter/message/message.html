@@ -28,7 +28,7 @@
         {% if submission.publish %}
         <li><a href="https://{{ site.domain }}{{ submission.get_absolute_url }}">{% trans "Read message online" %}</a></li>
         {% endif %}
-        <li><a href="https://{{ site.domain }}{% url "newsletter_unsubscribe_request" newsletter.slug %}">{% trans "Unsubscribe" %}</a></li>
+        <li>{% include "newsletter/message/_unsubscribe.html" %}</li>
     </ul>
 </body>
 </html>
