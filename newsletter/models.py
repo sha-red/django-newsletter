@@ -351,7 +351,10 @@ class Subscription(models.Model):
     class Meta:
         verbose_name = _('subscription')
         verbose_name_plural = _('subscriptions')
-        unique_together = ('user', 'email_field', 'newsletter')
+        unique_together = (
+            ('email_field', 'newsletter'),
+            ('user', 'newsletter')
+        )
 
     def get_recipient(self):
         return get_address(self.name, self.email)
@@ -484,7 +487,7 @@ class Article(models.Model):
 
 
 def get_default_newsletter_pk():
-    return Newsletter.get_default().pk
+    return getattr(Newsletter.get_default(), 'pk', None)
 
 
 @python_2_unicode_compatible
