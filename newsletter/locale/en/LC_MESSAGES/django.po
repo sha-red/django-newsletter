@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-25 14:33+0200\n"
+"POT-Creation-Date: 2018-06-06 10:43+0200\n"
 "PO-Revision-Date: 2018-05-24 14:48+0200\n"
 "Last-Translator: Erik Stein <erik@classlibrary.net>\n"
 "Language-Team: \n"
@@ -114,11 +114,11 @@ msgstr ""
 msgid "Submissions"
 msgstr ""
 
-#: admin.py:100 models.py:115 models.py:312 models.py:498 models.py:716
+#: admin.py:100 models.py:115 models.py:312 models.py:501 models.py:719
 msgid "newsletter"
 msgstr ""
 
-#: admin.py:118 models.py:568
+#: admin.py:118 models.py:571
 msgid "submission"
 msgstr ""
 
@@ -158,7 +158,7 @@ msgstr ""
 msgid "Optional"
 msgstr ""
 
-#: admin.py:255 models.py:464 models.py:509 models.py:720
+#: admin.py:255 models.py:467 models.py:512 models.py:723
 msgid "message"
 msgstr ""
 
@@ -408,132 +408,132 @@ msgstr ""
 msgid "subscriptions"
 msgstr ""
 
-#: models.py:438
+#: models.py:441
 msgid ""
 "Sort order determines the order in which articles are concatenated in a post."
 msgstr ""
 
-#: models.py:440
+#: models.py:443
 msgid "sort order"
 msgstr ""
 
-#: models.py:444 models.py:494
+#: models.py:447 models.py:497
 msgid "title"
 msgstr ""
 
-#: models.py:446
+#: models.py:449
 msgid "Don't show the title in the final email."
 msgstr ""
 
-#: models.py:447 models.py:495
+#: models.py:450 models.py:498
 msgid "slug"
 msgstr ""
 
-#: models.py:448
+#: models.py:451
 msgid "Für lokale Verlinkungen innerhalb des Newsletter (optional)"
 msgstr ""
 
-#: models.py:449
+#: models.py:452
 msgid "text"
 msgstr ""
 
-#: models.py:451
+#: models.py:454
 msgid "link"
 msgstr ""
 
-#: models.py:452
+#: models.py:455
 msgid "Ein \"Read More\"-Link z.B. auf eine Webseite."
 msgstr ""
 
-#: models.py:458
+#: models.py:461
 msgid "image"
 msgstr ""
 
-#: models.py:470
+#: models.py:473
 msgid "article"
 msgstr ""
 
-#: models.py:471
+#: models.py:474
 msgid "articles"
 msgstr ""
 
-#: models.py:502
+#: models.py:505
 msgid "created"
 msgstr ""
 
-#: models.py:505
+#: models.py:508
 msgid "modified"
 msgstr ""
 
-#: models.py:510
+#: models.py:513
 msgid "messages"
 msgstr ""
 
-#: models.py:515
+#: models.py:518
 #, python-format
 msgid "%(title)s in %(newsletter)s"
 msgstr ""
 
-#: models.py:569
+#: models.py:572
 msgid "submissions"
 msgstr ""
 
-#: models.py:572
+#: models.py:575
 #, python-format
 msgid "%(newsletter)s on %(publish_date)s"
 msgstr ""
 
-#: models.py:594
+#: models.py:597
 #, python-format
 msgid "Submitting %(submission)s to %(count)d people"
 msgstr ""
 
-#: models.py:654
+#: models.py:657
 #, python-format
 msgid "Submitting message to: %s."
 msgstr ""
 
-#: models.py:663
+#: models.py:666
 #, python-format
 msgid "Message %(subscription)s failed with error: %(error)s"
 msgstr ""
 
-#: models.py:681
+#: models.py:684
 #, python-format
 msgid "Submission of message %s"
 msgstr ""
 
-#: models.py:726
+#: models.py:729
 msgid ""
 "If you select none, the system will automatically find the subscribers for "
 "you."
 msgstr ""
 
-#: models.py:728
+#: models.py:731
 msgid "recipients"
 msgstr ""
 
-#: models.py:733
-msgid "release date"
+#: models.py:736
+msgid "send at"
 msgstr ""
 
-#: models.py:737
+#: models.py:740
 msgid "publish"
 msgstr ""
 
-#: models.py:738
+#: models.py:741
 msgid "Publish in archive."
 msgstr ""
 
-#: models.py:742
+#: models.py:745
 msgid "prepared"
 msgstr ""
 
-#: models.py:746
+#: models.py:749
 msgid "sent"
 msgstr ""
 
-#: models.py:750
+#: models.py:753
 msgid "sending"
 msgstr ""
 

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-newsletter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-25 14:33+0200\n"
+"POT-Creation-Date: 2018-06-06 10:43+0200\n"
 "PO-Revision-Date: 2018-05-24 14:55+0200\n"
 "Last-Translator: Erik Stein <erik@classlibrary.net>\n"
 "Language-Team: German (http://www.transifex.com/dokterbob/django-newsletter/"
@@ -129,11 +129,11 @@ msgstr "Abonnenten"
 msgid "Submissions"
 msgstr "Verschickungen"
 
-#: admin.py:100 models.py:115 models.py:312 models.py:498 models.py:716
+#: admin.py:100 models.py:115 models.py:312 models.py:501 models.py:719
 msgid "newsletter"
 msgstr "Newsletter"
 
-#: admin.py:118 models.py:568
+#: admin.py:118 models.py:571
 msgid "submission"
 msgstr "Verschickung"
 
@@ -173,7 +173,7 @@ msgstr "Die Ausgabe wird versandt."
 msgid "Optional"
 msgstr "Optional"
 
-#: admin.py:255 models.py:464 models.py:509 models.py:720
+#: admin.py:255 models.py:467 models.py:512 models.py:723
 msgid "message"
 msgstr "Ausgabe"
 
@@ -210,9 +210,6 @@ msgid "unsubscribe date"
 msgstr "Austragungsdatum"
 
 #: admin.py:420
-#, fuzzy, python-format
-#| msgid "%d user has been successfully subscribed."
-#| msgid_plural "%d users have been successfully subscribed."
 msgid "%d user has been successfully subscribed."
 msgid_plural "%d users have been successfully subscribed."
 msgstr[0] "%s Benutzer wurde erfolgreich als Abonnent_in hinzugefügt."
@@ -223,9 +220,6 @@ msgid "Subscribe selected users"
 msgstr "Ausgewählte Abonnements aktivieren"
 
 #: admin.py:432
-#, fuzzy, python-format
-#| msgid "%d user has been successfully unsubscribed."
-#| msgid_plural "%d users have been successfully unsubscribed."
 msgid "%d user has been successfully unsubscribed."
 msgid_plural "%d users have been successfully unsubscribed."
 msgstr[0] "%s Nutzer_in wurde erfolgreich ausgetragen."
@@ -236,9 +230,6 @@ msgid "Unsubscribe selected users"
 msgstr "Ausgewählte Abonnements deaktivieren"
 
 #: admin.py:493
-#, fuzzy, python-format
-#| msgid "%d subscription has been successfully added."
-#| msgid_plural "%d subscriptions have been successfully added."
 msgid "%d subscription has been successfully added."
 msgid_plural "%d subscriptions have been successfully added."
 msgstr[0] "%s Abonnements wurden erfolgreich hinzugefügt."
@@ -438,135 +429,135 @@ msgstr "Abonnement"
 msgid "subscriptions"
 msgstr "Abonnements"
 
-#: models.py:438
+#: models.py:441
 msgid ""
 "Sort order determines the order in which articles are concatenated in a post."
 msgstr ""
 "Sortierung legt fest, in welcher Reihenfolge die Artikel in der Ausgabe "
 "zusammengefasst werden."
 
-#: models.py:440
+#: models.py:443
 msgid "sort order"
 msgstr "Sortierung"
 
-#: models.py:444 models.py:494
+#: models.py:447 models.py:497
 msgid "title"
 msgstr "Titel"
 
-#: models.py:446
+#: models.py:449
 msgid "Don't show the title in the final email."
 msgstr ""
 
-#: models.py:447 models.py:495
+#: models.py:450 models.py:498
 msgid "slug"
 msgstr "Kurzform"
 
-#: models.py:448
+#: models.py:451
 msgid "Für lokale Verlinkungen innerhalb des Newsletter (optional)"
 msgstr ""
 
-#: models.py:449
+#: models.py:452
 msgid "text"
 msgstr "Text"
 
-#: models.py:451
+#: models.py:454
 msgid "link"
 msgstr "Link"
 
-#: models.py:452
+#: models.py:455
 msgid "Ein \"Read More\"-Link z.B. auf eine Webseite."
 msgstr ""
 
-#: models.py:458
+#: models.py:461
 msgid "image"
 msgstr "Bild"
 
-#: models.py:470
+#: models.py:473
 msgid "article"
 msgstr "Artikel"
 
-#: models.py:471
+#: models.py:474
 msgid "articles"
 msgstr "Artikel"
 
-#: models.py:502
+#: models.py:505
 msgid "created"
 msgstr "Erstellt"
 
-#: models.py:505
+#: models.py:508
 msgid "modified"
 msgstr "verändert"
 
-#: models.py:510
+#: models.py:513
 msgid "messages"
 msgstr "Ausgaben"
 
-#: models.py:515
+#: models.py:518
 #, python-format
 msgid "%(title)s in %(newsletter)s"
 msgstr "%(title)s in %(newsletter)s"
 
-#: models.py:569
+#: models.py:572
 msgid "submissions"
 msgstr "Verschickungen"
 
-#: models.py:572
+#: models.py:575
 #, python-format
 msgid "%(newsletter)s on %(publish_date)s"
 msgstr "%(newsletter)s vom %(publish_date)s"
 
-#: models.py:594
+#: models.py:597
 #, python-format
 msgid "Submitting %(submission)s to %(count)d people"
 msgstr "Verschicke %(submission)s an %(count)d Personen"
 
-#: models.py:654
+#: models.py:657
 #, python-format
 msgid "Submitting message to: %s."
 msgstr "Verschicke Ausgabe an: %s."
 
-#: models.py:663
+#: models.py:666
 #, python-format
 msgid "Message %(subscription)s failed with error: %(error)s"
 msgstr "Nachricht %(subscription)s schlug fehl: %(error)s"
 
-#: models.py:681
+#: models.py:684
 #, python-format
 msgid "Submission of message %s"
 msgstr "Verschickung der Ausgabe %s"
 
-#: models.py:726
+#: models.py:729
 msgid ""
 "If you select none, the system will automatically find the subscribers for "
 "you."
 msgstr ""
 "Falls Sie keine auswählen, wird das System automatisch Abonnenten auswählen."
 
-#: models.py:728
+#: models.py:731
 msgid "recipients"
 msgstr "Empfänger"
 
-#: models.py:733
-msgid "release date"
+#: models.py:736
+msgid "send at"
 msgstr "Versandzeitpunkt"
 
-#: models.py:737
+#: models.py:740
 msgid "publish"
 msgstr "veröffentlichen"
 
-#: models.py:738
+#: models.py:741
 msgid "Publish in archive."
 msgstr "Im Archiv einsehbar."
 
-#: models.py:742
+#: models.py:745
 msgid "prepared"
 msgstr "vorbereitet"
 
-#: models.py:746
+#: models.py:749
 msgid "sent"
 msgstr "Versendet"
 
-#: models.py:750
+#: models.py:753
 msgid "sending"
 msgstr "Sende"
 
@@ -792,8 +783,6 @@ msgid "Confirm unsubscription"
 msgstr "Abmeldung bestätigen"
 
 #: templates/newsletter/message/update.html:6
-#, fuzzy, python-format
-#| msgid "Update of subscription to %(title)s"
 msgid "Update of subscription to %(title)s"
 msgstr "Abonnement aktualisieren"
 
@@ -1047,6 +1036,9 @@ msgstr "Benutzer %(rs)s kündigte Abonnement von %(my_newsletter)s."
 #, python-format
 msgid "You are not subscribed to %s."
 msgstr "Sie haben %s nicht abonniert."
+
+#~ msgid "release date"
+#~ msgstr "Versandzeitpunkt"
 
 #~ msgid "publication date"
 #~ msgstr "Veröffentlichungsdatum"
