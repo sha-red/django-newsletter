@@ -1,29 +1,21 @@
 from __future__ import unicode_literals
 
 import logging
-logger = logging.getLogger(__name__)
-
 import six
-
-from django.db import models
 
 from django.conf import settings
 from django.conf.urls import url
-
 from django.contrib import admin, messages
 from django.contrib.sites.models import Site
-
 from django.core import serializers
 from django.core.exceptions import PermissionDenied
-
+from django.db import models
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-
 from django.shortcuts import render
-
-from django.utils.html import format_html
-from django.utils.translation import ugettext as _, ungettext, override
 from django.utils.formats import date_format
-
+from django.utils.html import format_html
+from django.utils.timezone import now
+from django.utils.translation import ugettext as _, ungettext, override
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 try:
     from django.views.i18n import JavaScriptCatalog
@@ -34,23 +26,32 @@ except ImportError:  # Django < 1.10
 
 from sorl.thumbnail.admin import AdminImageMixin
 
-from .models import (
-    Newsletter, Subscription, Article, Message, Submission
-)
-
-from django.utils.timezone import now
+try:
+    from import_export import resources
+    from import_export.admin import ExportActionModelAdmin
+    from import_export.fields import Field as ExportField
+    from import_export.formats import base_formats as export_formats
+    admin_base_class = ExportActionModelAdmin
+    enable_export = True
+except ImportError:
+    admin_base_class = admin.ModelAdmin
+    enable_export = False
 
 from .admin_forms import (
     SubmissionAdminForm, SubscriptionAdminForm, ImportForm, ConfirmForm,
     ArticleFormSet
 )
 from .admin_utils import ExtendibleModelAdminMixin, make_subscription
-
 from .compat import get_context, reverse
-
+from .models import (
+    Newsletter, Subscription, Article, Message, Submission
+)
 from .settings import newsletter_settings
 
-# Contsruct URL's for icons
+
+logger = logging.getLogger(__name__)
+
+
 ICON_URLS = {
     'yes': '%snewsletter/admin/img/icon-yes.gif' % settings.STATIC_URL,
     'wait': '%snewsletter/admin/img/waiting.gif' % settings.STATIC_URL,
@@ -66,7 +67,7 @@ class NewsletterAdmin(admin.ModelAdmin):
     list_filter = ['language']
     prepopulated_fields = {'slug': ('title',)}
 
-    """ List extensions """
+    # List extensions
     def _admin_url(self, obj, model, text):
         url = reverse('admin:%s_%s_changelist' %
                       (model._meta.app_label, model._meta.model_name),
@@ -112,7 +113,7 @@ class SubmissionAdmin(NewsletterAdminLinkMixin, ExtendibleModelAdminMixin,
     save_as = True
     filter_horizontal = ('subscriptions',)
 
-    """ List extensions """
+    # List extensions
     def admin_message(self, obj):
         return format_html('<a href="{}/">{}</a>', obj.id, obj.message.title)
     admin_message.short_description = _('submission')
@@ -353,8 +354,25 @@ class MessageAdmin(NewsletterAdminLinkMixin, ExtendibleModelAdminMixin,
         return my_urls + urls
 
 
+if enable_export:
+    class SubscriptionResource(resources.ModelResource):
+        name = ExportField(column_name='name')
+        email = ExportField(column_name='email')
+
+        class Meta:
+            model = Subscription
+            fields = ('name', 'email')
+            export_order = ('name', 'email')
+
+        def dehydrate_name(self, obj):
+            return obj.get_name()
+
+        def dehydrate_email(self, obj):
+            return obj.get_email()
+
+
 class SubscriptionAdmin(NewsletterAdminLinkMixin, ExtendibleModelAdminMixin,
-                        admin.ModelAdmin):
+                        admin_base_class):
     form = SubscriptionAdminForm
     list_display = (
         'name', 'email', 'admin_newsletter', 'admin_subscribe_date',
@@ -375,7 +393,15 @@ class SubscriptionAdmin(NewsletterAdminLinkMixin, ExtendibleModelAdminMixin,
     actions = ['make_subscribed', 'make_unsubscribed']
     exclude = ['unsubscribed']
 
-    """ List extensions """
+    if enable_export:
+        resource_class = SubscriptionResource
+        formats = [
+            export_formats.CSV,
+            export_formats.XLS,
+            # export_formats.XLSX,  # bug
+            export_formats.ODS,
+        ]
+
     def admin_status(self, obj):
         img_tag = '<img src="{}" width="10" height="10" alt="{}"/>'
         alt_txt = self.admin_status_text(obj)
