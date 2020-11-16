@@ -596,7 +596,7 @@ msgstr "HTML"
 
 #: templates/admin/newsletter/message/preview.html:34
 msgid "Text"
-msgstr "Mitteilung"
+msgstr ""
 
 #: templates/admin/newsletter/submission/change_form.html:17
 msgid "Submit"
